@@ -3,6 +3,8 @@ import { auth, googleAuthProvider } from "./firebase";
 import "./App.css";
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Household from './Household';
+import Home from './home';
+import UserHouseholds from './UserHouseholds';
 
 
 class App extends Component {
@@ -66,7 +68,9 @@ class App extends Component {
               </div>
             </nav>
             <switch>
+              <Route exact path="/" component={Home}/>
               <Route exact path="/households/new" component={this.houseHoldWithUser}/>
+              <Route path="/households/:householdId/tasks" component={UserHouseholds}/>
             </switch>
           </div>
         </Router>
