@@ -14,9 +14,9 @@ class App extends Component {
         this.state = {
             currentUser: null,
             users: {},
-         
+
         };
-    
+
     }
 
     componentDidMount() {
