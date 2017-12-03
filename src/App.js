@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Household from './Household';
-import Chat from './Chat
+import Chat from './Chat'
 
 
 class App extends Component {
