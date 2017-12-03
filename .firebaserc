@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "i-dont-know-where-to-eat"
+    "default": "roommates",
+    "roommates": "roommates-app-75271"
   }
 }
