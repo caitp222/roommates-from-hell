@@ -70,6 +70,7 @@ class App extends Component {
             </nav>
             <switch>
               <Route exact path="/households/new" component={this.houseHoldWithUser}/>
+              <Route exact path="/households/qwerty/chat" component={Chat}/>
             </switch>
           </div>
         </Router>
