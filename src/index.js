@@ -7,6 +7,7 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import Chat from './Chat'
 
 const Nav = () => (
   <nav>
@@ -25,8 +26,8 @@ const RouterComponent = () => (
   <Router>
     <div>
       <Nav/>
-
       <Route exact path="/" component={App}/>
+      <Route exact path="/households/qwerty/chat" component={Chat}/>
     </div>
   </Router>
 )

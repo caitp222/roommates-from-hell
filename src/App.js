@@ -1,63 +1,71 @@
-import React, {Component} from 'react';
-import {auth, database, googleAuthProvider} from './firebase';
-import {BrowserRouter} from 'react-router-dom';
-import pick from 'lodash/pick';
-import ChatBox from './Chat'
-
+import React, { Component } from "react";
+import { auth, database, googleAuthProvider, provider } from "./firebase";
+import { BrowserRouter } from "react-router-dom";
+import "./App.css";
 
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.usersRef = null;
-        this.userRef = null;
 
-        this.state = {
-            currentUser: null,
-            users: {},
+  constructor() {
+    super();
+    this.state = {
+      username: "",
+      user: null
+    };
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+  }
 
-        };
+  componentDidMount() {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ user });
+      }
+    });
+  }
 
-    }
+  handleChange(e) {}
 
-    componentDidMount() {
-        auth.onAuthStateChanged((currentUser) => {
-            this.setState({currentUser});
-            this.usersRef = database.ref('/users');
+  logout() {
+    auth.signOut().then(() => {
+      this.setState({ user: null });
+    });
+  }
 
-            if (currentUser) {
-                this.userRef = this.usersRef.child(currentUser.uid);
+  login() {
+    auth.signInWithPopup(googleAuthProvider).then(result => {
+      const user = result.user;
+      this.setState({ user });
+    });
+  }
 
-                this.userRef.once('value').then((snapshot) => {
-                    if (snapshot.val())
-                        return;
-                    const userInfo = pick(currentUser, ['displayName', 'photoURL', 'email']);
-                    this.userRef.set(userInfo);
-                });
-            }
-
-            this.usersRef.on('value', (snapshot) => {
-                this.setState({users: snapshot.val()});
-            });
-        });
-
-    }
-
-    toggleInstructions() {
-        this.setState(prevState => ({
-            showInstructions: !prevState.showInstructions
-        }));
-    }
-
-    render() {
-        return (
-          <div>
-            <p>Hello</p>
-            <ChatBox />
+  render() {
+    return (
+      <div className="app">
+        <header>
+          <div className="wrapper">
+            <h1>Querty Household</h1>
+            {this.state.user ? (
+              <button onClick={this.logout}>Logout</button>
+            ) : (
+              <button onClick={this.login}>Log In</button>
+            )}
           </div>
-
-        );
-    }
+        </header>
+        {this.state.user ? (
+          <div>
+            <div className="user-profile">
+              <img src={this.state.user.photoURL} />
+            </div>
+          </div>
+        ) : (
+          <div className="wrapper">
+            <p>Login to your Household to continue</p>
+          </div>
+        )}
+      </div>
+    );
+  }
 }
 
 export default App;

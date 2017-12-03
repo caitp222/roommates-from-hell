@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './styles/chat.css'
 import {
-  firebase,
+  fire,
   database,
   auth,
   storage,
@@ -26,10 +26,10 @@ class ChatBox extends Component {
       const messages = Object.values(snapshot.val())
       this.setState ({messages: messages})
     })
-    const setMessage = function(data) {
-    const val = data.val();
-    this.displayMessage(data.key, val.name, val.text, val.photoUrl, val.imageUrl);
-  }.bind(this);
+  //   const setMessage = function(data) {
+  //   const val = data.val();
+  //   this.displayMessage(data.key, val.name, val.text, val.photoUrl, val.imageUrl);
+  // }.bind(this);
   }
 
   handleMessageChange = function(event) {
@@ -42,7 +42,7 @@ class ChatBox extends Component {
     const messageText = this.state.newMessageText
     const messagesRef = database.ref('/chats/qwerty/messages')
     messagesRef.push({
-      name: "Caitlin",
+      name: fire.auth().currentUser.displayName,
       text: messageText
     }).then(() => {
       this.setState({ newMessageText: "" })
