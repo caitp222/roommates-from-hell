@@ -55,14 +55,13 @@ class App extends Component {
             <nav className='transparent z-depth-0'>
               <div className="nav-wrapper">
                 <a href="/" className="brand-logo"><img src='/logo.png' height='70' alt="friends from hell"/></a>
-                <ul id="nav-mobile" className="right hide-on-med-and-down">
+                <ul id="nav-mobile" className="right">
                   {this.state.user ? (
                     <li><a className="red-text" onClick={this.logout}>Logout</a></li>
                   ) : (
                     <li><a className="red-text" onClick={this.login}>Log In</a></li>
                   )}
-                  <li><Link className="red-text" to="/households/new">new households</Link></li>
-                  <li><Link className="red-text" to="/topics">Topics</Link></li>
+                  <li><Link className="red-text" to="/households/new">household</Link></li>
                   <li><Link to="/households/1/tasks">{this.state.user ? (<img src={this.state.user.photoURL} style={{marginTop: '15px', marginRight: '10px', borderRadius: '50%'}} alt="profile" width='30' height='30'/>) : null}</Link></li>
                 </ul>
               </div>
