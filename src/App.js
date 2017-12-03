@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import { auth, googleAuthProvider } from "./firebase";
+import { auth, database, googleAuthProvider, provider } from "./firebase";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Household from './Household';
+import Chat from './Chat
 
 class App extends Component {
+
   constructor() {
     super();
     this.state = {
@@ -79,6 +82,7 @@ class App extends Component {
               </div>
             </nav>
             <Route exact path="/households/new" component={Household}/>
+            <Route exact path="/households/qwerty/chat" component={Chat}/>
           </div>
         </Router>
         {this.logInStuff()}

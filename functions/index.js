@@ -23,3 +23,4 @@ exports.makeUppercase = functions.database.ref('/households_practice')
       // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
       // return event.data.ref.parent.child('uppercase').set(uppercase);
     });
+
