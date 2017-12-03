@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {auth, database, googleAuthProvider} from './firebase';
 import {BrowserRouter} from 'react-router-dom';
 import pick from 'lodash/pick';
+import ChatBox from './Chat'
 
 
 
@@ -14,9 +15,9 @@ class App extends Component {
         this.state = {
             currentUser: null,
             users: {},
-         
+
         };
-    
+
     }
 
     componentDidMount() {
@@ -50,7 +51,11 @@ class App extends Component {
 
     render() {
         return (
+          <div>
             <p>Hello</p>
+            <ChatBox />
+          </div>
+
         );
     }
 }
