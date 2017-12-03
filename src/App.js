@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Household from './Household';
+import Home from './home';
+import UserHouseholds from './UserHouseholds';
 import Chat from './Chat'
 
 
@@ -69,8 +71,11 @@ class App extends Component {
               </div>
             </nav>
             <switch>
+              <Route exact path="/" component={Home}/>
               <Route exact path="/households/new" component={this.houseHoldWithUser}/>
+              <Route path="/households/:householdId/tasks" component={UserHouseholds}/>
               <Route exact path="/households/qwerty/chat" component={Chat}/>
+
             </switch>
           </div>
         </Router>

@@ -19,11 +19,17 @@ class Household extends Component {
       const newHousehold = {
         name: this.state.name,
         address: this.state.address,
-        user_id: auth.currentUser.displayName
+        user_id: auth.currentUser.displayName,
+        tasks: [
+          {assignee: 'Roman',name: 'Wash Dishes', done: false},
+          {assignee: 'Nico',name: 'Wipe the dust', done: false},
+          {assignee: 'La-Keisha',name: 'Wash the floor', done: false},
+          {assignee: 'Caitlin',name: 'Walk the cat', done: false},
+        ]
       }
 
       database.ref('/households_practice').set(newHousehold).then( (res) => {
-        this.props.history.push('/');
+        this.props.history.push('/households/1/tasks');
       });
     }
 
