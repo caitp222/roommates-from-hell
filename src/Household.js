@@ -29,18 +29,18 @@ class Household extends Component {
 
     render() {
         return (
-          <div classNAme="container">
+          <div className="container">
             <h3 className="center-align">Create a new household</h3>
             <div className="row">
               <form className="col s12" onSubmit={this.submitHandler}>
                 <div className="row">
                   <div className="input-field col s6 offset-s3">
                     <input id="icon_prefix" type="text" onChange={(e) => this.setState({name: e.target.value})}/>
-                    <label for="icon_prefix">Name</label>
+                    <label htmlFor="icon_prefix">Name</label>
                   </div>
                   <div className="input-field col s6 offset-s3">
                     <input id="icon_telephone" type="text" onChange={(e) => this.setState({address: e.target.value})}/>
-                    <label for="icon_telephone">Address</label>
+                    <label htmlFor="icon_telephone">Address</label>
                   </div>
                 </div>
                 <button className="btn waves-effect waves-light col s4 offset-s4" type="submit" name="action">Submit

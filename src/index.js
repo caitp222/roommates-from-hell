@@ -13,7 +13,7 @@ import {
 const Nav = () => (
   <nav className='transparent z-depth-0'>
     <div className="nav-wrapper">
-      <a href="/" className="brand-logo"><img src='/logo.png' height='70'/></a>
+      <a href="/" className="brand-logo"><img src='/logo.png' height='70' alt="friends from hell"/></a>
       <ul id="nav-mobile" className="right hide-on-med-and-down">
         <li><Link className="red-text" to="/">Home</Link></li>
         <li><Link className="red-text" to="/households/new">new households</Link></li>
