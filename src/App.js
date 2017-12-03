@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { auth, googleAuthProvider } from "./firebase";
+import { auth, database, googleAuthProvider, provider } from "./firebase";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 
 
 class App extends Component {
+
   constructor() {
     super();
     this.state = {
@@ -53,7 +55,7 @@ class App extends Component {
         {this.state.user ? (
           <div>
             <div className="user-profile">
-              <img src={this.state.user.photoURL} alt="profile"/>
+              <img src={this.state.user.photoURL} />
             </div>
           </div>
         ) : (
