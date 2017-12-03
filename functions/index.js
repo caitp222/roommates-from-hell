@@ -4,10 +4,9 @@ const functions = require('firebase-functions');
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
 
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//
-//   response.send("Hello from Firebase!");
-// });
+exports.helloWorld = functions.https.onRequest((request, response) => {
+  response.send("Hello from Firebase!");
+});
 
 exports.makeUppercase = functions.database.ref('/households_practice')
     .onWrite(event => {
@@ -23,4 +22,3 @@ exports.makeUppercase = functions.database.ref('/households_practice')
       // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
       // return event.data.ref.parent.child('uppercase').set(uppercase);
     });
-

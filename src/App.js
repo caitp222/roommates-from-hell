@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Household from './Household';
 import Chat from './Chat
 
+
 class App extends Component {
 
   constructor() {
@@ -18,6 +19,12 @@ class App extends Component {
     this.logout = this.logout.bind(this);
   }
 
+  houseHoldWithUser = (props) => (
+    <Household
+      user={this.state.user}
+      {...props}
+      />
+  )
   componentDidMount() {
     auth.onAuthStateChanged(user => {
       if (user) {
@@ -41,32 +48,6 @@ class App extends Component {
     });
   }
 
-  logInStuff = () => (
-    <div className="app">
-      <header>
-        <div className="wrapper">
-          <h1>Querty Household</h1>
-          {this.state.user ? (
-            <button onClick={this.logout}>Logout</button>
-          ) : (
-            <button onClick={this.login}>Log In</button>
-          )}
-        </div>
-      </header>
-      {this.state.user ? (
-        <div>
-          <div className="user-profile">
-            <img src={this.state.user.photoURL} alt="profile"/>
-          </div>
-        </div>
-      ) : (
-        <div className="wrapper">
-          <p>Login to your Household to continue</p>
-        </div>
-      )}
-    </div>
-  )
-
   render() {
     return (
       <div>
@@ -76,16 +57,22 @@ class App extends Component {
               <div className="nav-wrapper">
                 <a href="/" className="brand-logo"><img src='/logo.png' height='70' alt="friends from hell"/></a>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
+                  {this.state.user ? (
+                    <li><a className="red-text" onClick={this.logout}>Logout</a></li>
+                  ) : (
+                    <li><a className="red-text" onClick={this.login}>Log In</a></li>
+                  )}
                   <li><Link className="red-text" to="/households/new">new households</Link></li>
                   <li><Link className="red-text" to="/topics">Topics</Link></li>
+                  <li><Link to="/households/1/tasks">{this.state.user ? (<img src={this.state.user.photoURL} style={{marginTop: '15px', marginRight: '10px', borderRadius: '50%'}} alt="profile" width='30' height='30'/>) : null}</Link></li>
                 </ul>
               </div>
             </nav>
-            <Route exact path="/households/new" component={Household}/>
-            <Route exact path="/households/qwerty/chat" component={Chat}/>
+            <switch>
+              <Route exact path="/households/new" component={this.houseHoldWithUser}/>
+            </switch>
           </div>
         </Router>
-        {this.logInStuff()}
       </div>
     );
   }
