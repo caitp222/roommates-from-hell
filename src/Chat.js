@@ -1,23 +1,51 @@
 import React, { Component } from 'react';
 import './styles/chat.css'
+import {
+  firebase,
+  database,
+  auth,
+  storage,
+  googleAuthProvider
+} from './firebase.js'
 
 class ChatBox extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      message: ""
+      messages: []
     }
     this.handleMessageChange = this.handleMessageChange.bind(this)
     this.saveMessage = this.saveMessage.bind(this)
+    this.loadMessages = this.loadMessages.bind(this)
+  }
+
+  componentDidMount = function() {
+    this.loadMessages()
+  }
+  //
+  loadMessages = function() {
+    const messagesRef = database.ref('households/1/messages')
+    messagesRef.on('value', function(snapshot) {
+      console.log(snapshot)
+      debugger
+    })
   }
 
   handleMessageChange = function(event) {
-    this.setState({ message: event.target.value })
+    this.setState({ text: event.target.value })
   }
 
   saveMessage = function(event) {
     event.preventDefault()
-    debugger;
+    const currentUser = googleAuthProvider.currentUser
+    const message = this.state
+    const messagesRef = database.ref('/households/{this.state.householdId}/messages')
+    messagesRef.push({
+      name: currentUser.displayName,
+      text: message.text
+    }).then(function() {
+      console.log("cool")
+    })
   }
 
   render() {
