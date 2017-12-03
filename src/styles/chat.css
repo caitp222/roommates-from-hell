@@ -181,3 +181,8 @@ main, #messages-card {
   top: -1px;
   margin-right: 5px;
 }
+
+p.tiny {
+  font-size: 12px;
+  font-weight: lighter;
+}
