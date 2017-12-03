@@ -2,6 +2,24 @@ import React, { Component } from 'react';
 import './styles/chat.css'
 
 class ChatBox extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      message: ""
+    }
+    this.handleMessageChange = this.handleMessageChange.bind(this)
+    this.saveMessage = this.saveMessage.bind(this)
+  }
+
+  handleMessageChange = function(event) {
+    this.setState({ message: event.target.value })
+  }
+
+  saveMessage = function(event) {
+    event.preventDefault()
+    debugger;
+  }
+
   render() {
     return(
       <div className="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -29,9 +47,9 @@ class ChatBox extends Component {
                 <div id="messages">
                   <span id="message-filler"></span>
                 </div>
-                <form id="message-form" action="#">
+                <form id="message-form" action="#" onSubmit={ this.saveMessage }>
                   <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input className="mdl-textfield__input" type="text" id="message" />
+                    <input className="mdl-textfield__input" type="text" id="message" onChange={ this.handleMessageChange }/>
                     <label className="mdl-textfield__label" for="message">Message...</label>
                   </div>
                   <button id="submit" disabled type="submit" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
