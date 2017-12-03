@@ -7,44 +7,45 @@ import {
   storage,
   googleAuthProvider
 } from './firebase.js'
+import Message from './Message'
 
 class ChatBox extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      messages: []
+      messages: [],
+      newMessageText: ""
     }
     this.handleMessageChange = this.handleMessageChange.bind(this)
     this.saveMessage = this.saveMessage.bind(this)
-    this.loadMessages = this.loadMessages.bind(this)
   }
 
   componentDidMount = function() {
-    this.loadMessages()
-  }
-  //
-  loadMessages = function() {
-    const messagesRef = database.ref('households/1/messages')
-    messagesRef.on('value', function(snapshot) {
-      console.log(snapshot)
-      debugger
+    const messagesRef = database.ref('chats/qwerty/messages')
+    messagesRef.on('value', (snapshot) => {
+      const messages = Object.values(snapshot.val())
+      this.setState ({messages: messages})
     })
+    const setMessage = function(data) {
+    const val = data.val();
+    this.displayMessage(data.key, val.name, val.text, val.photoUrl, val.imageUrl);
+  }.bind(this);
   }
 
   handleMessageChange = function(event) {
-    this.setState({ text: event.target.value })
+    this.setState({ newMessageText: event.target.value })
   }
 
   saveMessage = function(event) {
     event.preventDefault()
-    const currentUser = googleAuthProvider.currentUser
-    const message = this.state
-    const messagesRef = database.ref('/households/{this.state.householdId}/messages')
+    // const currentUser = googleAuthProvider.currentUser
+    const messageText = this.state.newMessageText
+    const messagesRef = database.ref('/chats/qwerty/messages')
     messagesRef.push({
-      name: currentUser.displayName,
-      text: message.text
-    }).then(function() {
-      console.log("cool")
+      name: "Caitlin",
+      text: messageText
+    }).then(() => {
+      this.setState({ newMessageText: "" })
     })
   }
 
@@ -74,13 +75,16 @@ class ChatBox extends Component {
               <div className="mdl-card__supporting-text mdl-color-text--grey-600">
                 <div id="messages">
                   <span id="message-filler"></span>
+                  { this.state.messages.map( function(message) {
+                    return <Message message={message} />
+                  }) }
                 </div>
-                <form id="message-form" action="#" onSubmit={ this.saveMessage }>
+                <form id="message-form" action="#">
                   <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input className="mdl-textfield__input" type="text" id="message" onChange={ this.handleMessageChange }/>
+                    <input className="mdl-textfield__input" type="text" id="message" value={ this.state.newMessageText } onChange={ this.handleMessageChange }/>
                     <label className="mdl-textfield__label" for="message">Message...</label>
                   </div>
-                  <button id="submit" disabled type="submit" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                  <button id="submit" type="submit" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onClick={ this.saveMessage }>
                     Send
                   </button>
                 </form>
