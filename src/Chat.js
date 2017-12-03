@@ -26,10 +26,6 @@ class ChatBox extends Component {
       const messages = Object.values(snapshot.val())
       this.setState ({messages: messages})
     })
-  //   const setMessage = function(data) {
-  //   const val = data.val();
-  //   this.displayMessage(data.key, val.name, val.text, val.photoUrl, val.imageUrl);
-  // }.bind(this);
   }
 
   handleMessageChange = function(event) {
@@ -55,7 +51,7 @@ class ChatBox extends Component {
         <header className="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
           <div className="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
             <div className="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
-              <h3><i className="material-icons">chat_bubble_outline</i> Friendly Chat</h3>
+              <h3><i className="material-icons">chat_bubble_outline</i> Qwerty Chat</h3>
             </div>
             <div id="user-container">
               <div hidden id="user-pic"></div>
