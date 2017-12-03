@@ -22,7 +22,7 @@ class Household extends Component {
         user_id: 1
       }
 
-      database.ref('/households').push(newHousehold).then( (res) => {
+      database.ref('/households_practice').push(newHousehold).then( (res) => {
         this.props.history.push('/');
       });
     }
