@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import { auth, googleAuthProvider } from "./firebase";
+import { auth, database, googleAuthProvider, provider } from "./firebase";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Household from './Household';
 import Home from './home';
 import UserHouseholds from './UserHouseholds';
+import Chat from './Chat'
 
 
 class App extends Component {
+
   constructor() {
     super();
     this.state = {
@@ -71,6 +74,8 @@ class App extends Component {
               <Route exact path="/" component={Home}/>
               <Route exact path="/households/new" component={this.houseHoldWithUser}/>
               <Route path="/households/:householdId/tasks" component={UserHouseholds}/>
+              <Route exact path="/households/qwerty/chat" component={Chat}/>
+
             </switch>
           </div>
         </Router>
