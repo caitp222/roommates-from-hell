@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {database} from './firebase.js';
+import {database, auth} from './firebase.js';
 
 class Household extends Component {
     constructor(props){
@@ -19,10 +19,10 @@ class Household extends Component {
       const newHousehold = {
         name: this.state.name,
         address: this.state.address,
-        user_id: 1
+        user_id: auth.currentUser.displayName
       }
 
-      database.ref('/households').push(newHousehold).then( (res) => {
+      database.ref('/households_practice').set(newHousehold).then( (res) => {
         this.props.history.push('/');
       });
     }
