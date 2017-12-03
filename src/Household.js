@@ -14,7 +14,7 @@ class Household extends Component {
     submitHandler = (e) => {
       e.preventDefault();
       console.log(this)
-      debugger
+      // debugger
 
       const newHousehold = {
         name: this.state.name,
