@@ -14,9 +14,6 @@ class UserHouseholds extends Component {
   componentDidMount(){
 
     database.ref('/households_practice').on('value', (res) => {
-      // this.props.history.push('/');
-      // debugger
-
       this.setState({
         name: res.val().name,
         tasks: res.val().tasks
