@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { auth, database, googleAuthProvider, provider } from "./firebase";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import pick from "lodash/pick";
+
 
 class App extends Component {
+
   constructor() {
     super();
     this.state = {
